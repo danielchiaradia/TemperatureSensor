@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+libraries=[{"package"\:"esp8266","platform"\:"esp8266","library"\:"ESP8266mDNS"},{"package"\:"esp8266","platform"\:"esp8266","library"\:"Ticker"},"Adafruit Si7021 Library",{"package"\:"esp8266","platform"\:"esp8266","library"\:"ESP8266WiFi"},"RestClient",{"package"\:"esp8266","platform"\:"esp8266","library"\:"ArduinoOTA"},"Adafruit SSD1306",{"package"\:"esp8266","platform"\:"esp8266","library"\:"SPI"},"Adafruit GFX Library",{"package"\:"esp8266","platform"\:"esp8266","library"\:"Wire"}]

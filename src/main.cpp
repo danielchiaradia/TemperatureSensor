@@ -103,10 +103,7 @@ void deepSleep(int secondToSleep, WakeMode wakeMode = WAKE_RF_DISABLED)
 
 void readSensorData()
 {
-	// pinMode(SENSOR_VCC_PIN, OUTPUT);
-	// digitalWrite(SENSOR_VCC_PIN, HIGH);
-	delay(100);
-	// Wire.begin(2, 0);
+	Wire.begin(2, 0);
 	Adafruit_Si7021 sensor = Adafruit_Si7021();
 	if (!sensor.begin())
 	{
@@ -147,7 +144,7 @@ void sendSensorData()
 
 void configureWiFi()
 {
-	IPAddress local_IP(192, 168, 178, 49);
+	IPAddress local_IP(192, 168, 178, 31);
 	IPAddress gateway(192, 168, 178, 1);
 	IPAddress subnet(255, 255, 255, 0);
 	WiFi.config(local_IP, gateway, subnet);

@@ -171,7 +171,7 @@ void connectToWifi()
 	{
 		Logger.log("Could not connect to WiFi. Channel changed?");
 		configureWiFi();
-		deepSleep(WIFI_RECONNECT_WAITTIME_SECS);
+		deepSleepModenOn(WIFI_RECONNECT_WAITTIME_SECS);
 	}
 
 	Logger.log("...Connected! IP Address: %s", WiFi.localIP().toString().c_str());

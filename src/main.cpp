@@ -47,6 +47,7 @@ void configureWiFi();
 void connectToWifi();
 void setup();
 void loop();
+bool isSSIDAvailable(String ssid);
 // End of function specification
 
 void readRtcData()
@@ -82,6 +83,20 @@ uint32_t getWifiChannel(String ssid)
 		}
 	}
 	return -1;
+}
+
+bool isSSIDAvailable(String ssid)
+{
+	int networksFound = WiFi.scanNetworks();
+	int i;
+	for (i = 0; i < networksFound; i++)
+	{
+		if (ssid == WiFi.SSID(i))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void saveRtcData()
@@ -144,7 +159,7 @@ void sendSensorData()
 
 void configureWiFi()
 {
-	IPAddress local_IP(192, 168, 178, 31);
+	IPAddress local_IP(192, 168, 178, SENSOR_IP);
 	IPAddress gateway(192, 168, 178, 1);
 	IPAddress subnet(255, 255, 255, 0);
 	WiFi.config(local_IP, gateway, subnet);
@@ -169,6 +184,10 @@ void connectToWifi()
 
 	if (WiFi.waitForConnectResult(WIFI_CONNECT_TIMEOUT_SECS * 1000) != WL_CONNECTED)
 	{
+		if (!isSSIDAvailable(WIFI_SSID)) {
+			Logger.log("SSID not available");	
+			deepSleep(INTERVAL_SEND_DATA_SECS);
+		}
 		Logger.log("Could not connect to WiFi. Channel changed?");
 		configureWiFi();
 		deepSleepModenOn(WIFI_RECONNECT_WAITTIME_SECS);
@@ -182,7 +201,7 @@ void connectToWifi()
 void setup()
 {
 	Serial.begin(74880);
-	Logger.setEnable(String(STR(LOG_ENABLED)) == String("enabled"));
+	Logger.setEnable(false);
 	Logger.log("Setup");
 	startedAtMs = millis();
 	readRtcData();

@@ -186,7 +186,7 @@ void connectToWifi()
 	{
 		if (!isSSIDAvailable(WIFI_SSID)) {
 			Logger.log("SSID not available");	
-			deepSleep(INTERVAL_SEND_DATA_SECS);
+			deepSleepModenOn(INTERVAL_SEND_DATA_SECS);
 		}
 		Logger.log("Could not connect to WiFi. Channel changed?");
 		configureWiFi();
